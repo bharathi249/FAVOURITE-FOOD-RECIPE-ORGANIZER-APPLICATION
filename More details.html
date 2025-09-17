@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Nutritional Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: skyblue;
+            padding: 20px;
+        }
+
+        h1 {
+            color:violet;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: violet;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: violet;
+        }
+
+        .nutrition-info {
+            margin-top: 20px;
+            padding: 20px;
+            background-color:skyblue;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nutrition-info h2 {
+            color: #333;
+        }
+
+        .nutrition-info ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .nutrition-info ul li {
+            background-color: skyblue;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Enter Recipe and Get Nutritional Information</h1>
+
+    <form id="recipeForm">
+        <div class="form-group">
+            <label for="recipeName">Recipe Name:</label>
+            <select id="recipeName">
+                <option value="">Select a Recipe</option>
+                <option value="Dosa">Dosa</option>
+                <option value="Biriyani">Biriyani</option>
+                <option value="Salad">Salad</option>
+                <option value="Paneer Tikka">Paneer Tikka</option>
+            </select>
+        </div>
+
+        <button type="button" onclick="getNutritionalInfo()">Get Nutritional Information</button>
+    </form>
+
+    <div class="nutrition-info" id="nutritionInfo" style="display:none;">
+        <h2>Nutritional Information</h2>
+        <ul id="nutritionList"></ul>
+    </div>
+
+    <script>
+        const recipeNutritionData = {
+            "Dosa": {
+                calories: "133 kcal",
+                vitamins: "Vitamin B6, Vitamin C",
+                protein: "2.7g",
+                carbs: "28g",
+                fat: "1.7g",
+                calcium: "4%",
+                iron: "6%"
+            },
+            "Biriyani": {
+                calories: "290 kcal",
+                vitamins: "Vitamin A, Vitamin C",
+                protein: "11g",
+                carbs: "45g",
+                fat: "7g",
+                calcium: "8%",
+                iron: "12%"
+            },
+            "Salad": {
+                calories: "150 kcal",
+                vitamins: "Vitamin A, Vitamin C, Vitamin K",
+                protein: "3g",
+                carbs: "10g",
+                fat: "12g",
+                calcium: "5%",
+                iron: "3%"
+            },
+            "Paneer Tikka": {
+                calories: "230 kcal",
+                vitamins: "Vitamin B12, Vitamin D",
+                protein: "15g",
+                carbs: "10g",
+                fat: "17g",
+                calcium: "15%",
+                iron: "8%"
+            }
+        };
+
+        function getNutritionalInfo() {
+            const recipeName = document.getElementById("recipeName").value;
+            const nutritionInfo = document.getElementById("nutritionInfo");
+            const nutritionList = document.getElementById("nutritionList");
+
+            // Clear any previous data
+            nutritionList.innerHTML = '';
+
+            if (recipeName && recipeNutritionData[recipeName]) {
+                const nutritionData = recipeNutritionData[recipeName];
+
+                // Populate nutritional info
+                const nutritionItems = `
+                    <li><strong>Calories:</strong> ${nutritionData.calories}</li>
+                    <li><strong>Vitamins:</strong> ${nutritionData.vitamins}</li>
+                    <li><strong>Protein:</strong> ${nutritionData.protein}</li>
+                    <li><strong>Carbohydrates:</strong> ${nutritionData.carbs}</li>
+                    <li><strong>Fat:</strong> ${nutritionData.fat}</li>
+                    <li><strong>Calcium:</strong> ${nutritionData.calcium}</li>
+                    <li><strong>Iron:</strong> ${nutritionData.iron}</li>
+                `;
+
+                nutritionList.innerHTML = nutritionItems;
+                nutritionInfo.style.display = 'block';
+            } else {
+                alert('Please select a recipe to get nutritional information.');
+                nutritionInfo.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
