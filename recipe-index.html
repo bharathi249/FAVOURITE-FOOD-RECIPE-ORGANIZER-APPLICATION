@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Index</title>
+    <link rel="stylesheet" href="styles1.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .recipe-options button {
+            margin: 10px;
+            padding: 15px 30px;
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        button:hover {
+            background-color: #8b3d6c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipe Index</h1>
+    <div class="recipe-options">
+        <button onclick="goToRecipe('breakfast')">Breakfast</button>
+        <button onclick="goToRecipe('lunch')">Lunch</button>
+        <button onclick="goToRecipe('dinner')">Dinner</button>
+    </div>
+
+    <script>
+        function goToRecipe(mealType) {
+            if (mealType === 'breakfast') {
+                window.location.href = 'breakfast.html';
+            } else if (mealType === 'lunch') {
+                window.location.href = 'lunch.html';
+            } else if (mealType === 'dinner') {
+                window.location.href = 'dinner.html';
+            }
+        }
+    </script>
+</body>
+</html>
