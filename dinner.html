@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinner Recipes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:skyblue;
+            padding: 20px;
+        
+           
+        }
+
+        h1 {
+            color: violet;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: violet;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: violet;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dinner Recipe Entry</h1>
+
+    <form id="dinnerForm">
+        <div class="form-group">
+            <label for="dinnerRecipeName">Recipe Name:</label>
+            <select id="dinnerRecipeName">
+                <option value="">Select a Recipe</option>
+                <option value="Chapatti">Chapatti</option>
+                <option value="Ghee Rice">Ghee Rice</option>
+                <option value="Paneer Tikka">Paneer Tikka</option>
+                <option value="Jeera Rice">Jeera Rice</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="ingredients">Ingredients:</label>
+            <textarea id="dinnerIngredients" readonly></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="instructions">Instructions:</label>
+            <textarea id="dinnerInstructions" readonly></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="videoLink">Video Link:</label>
+            <input type="text" id="dinnerVideoLink" readonly>
+        </div>
+
+        <button type="button" onclick="addToFavorite('dinner')">Add to Favorite Recipes</button>
+    </form>
+
+    <script>
+        const dinnerRecipes = {
+            "Chapatti": {
+                ingredients: "Wheat flour, Water, Salt, Oil",
+                instructions: "1. Knead flour with water. \n2. Roll dough into circles. \n3. Cook on a hot griddle.",
+                videoLink: "https://www.example.com/chapatti-video"
+            },
+            "Ghee Rice": {
+                ingredients: "Rice, Ghee, Spices",
+                instructions: "1. Cook rice with ghee and spices. \n2. Serve hot.",
+                videoLink: "https://www.example.com/ghee-rice-video"
+            },
+            "Paneer Tikka": {
+                ingredients: "Paneer, Yogurt, Spices",
+                instructions: "1. Marinate paneer in spiced yogurt. \n2. Grill or bake until golden.",
+                videoLink: "https://www.example.com/paneer-tikka-video"
+            },
+            "Jeera Rice": {
+                ingredients: "Rice, Cumin, Ghee",
+                instructions: "1. Cook cumin in ghee. \n2. Add rice and cook until fragrant.",
+                videoLink: "https://www.example.com/jeera-rice-video"
+            }
+        };
+
+        document.getElementById('dinnerRecipeName').addEventListener('change', function() {
+            const recipeName = this.value;
+            if (dinnerRecipes[recipeName]) {
+                document.getElementById('dinnerIngredients').value = dinnerRecipes[recipeName].ingredients;
+                document.getElementById('dinnerInstructions').value = dinnerRecipes[recipeName].instructions;
+                document.getElementById('dinnerVideoLink').value = dinnerRecipes[recipeName].videoLink;
+            }
+        });
+        const favoriteRecipes = {
+            breakfast: [],
+            lunch: [],
+            dinner: []
+        };
+
+        function addToFavorite(mealType) {
+            const recipeName = document.getElementById(`${mealType}RecipeName`).value;
+            if (recipeName) {
+                favoriteRecipes[mealType].push(recipeName);
+                alert(`${recipeName} added to favorite ${mealType} recipes!`);
+                localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+                window.location.href = 'favorite recipes.html';
+            } else {
+                alert('Please select a recipe.');
+            }
+        }
+    </script>
+</body>
+</html>
+    
