@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Recipes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            background-image: url( https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdFtw6KqxEIpCMy713PdFQTPEklOGHRmCHqQ&s);
+            background-size: 76%;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .column {
+            width: 30%;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Your Favorite Recipes</h1>
+
+    <div class="container">
+        <div class="column">
+            <h2>Breakfast</h2>
+            <ul id="breakfastList"></ul>
+        </div>
+        <div class="column">
+            <h2>Lunch</h2>
+            <ul id="lunchList"></ul>
+        </div>
+        <div class="column">
+            <h2>Dinner</h2>
+            <ul id="dinnerList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || {
+            breakfast: [],
+            lunch: [],
+            dinner: []
+        };
+
+        function displayRecipes() {
+            const breakfastList = document.getElementById('breakfastList');
+            const lunchList = document.getElementById('lunchList');
+            const dinnerList = document.getElementById('dinnerList');
+
+            favoriteRecipes.breakfast.forEach(recipe => {
+                const li = document.createElement('li');
+                li.textContent = recipe;
+                breakfastList.appendChild(li);
+            });
+
+            favoriteRecipes.lunch.forEach(recipe => {
+                const li = document.createElement('li');
+                li.textContent = recipe;
+                lunchList.appendChild(li);
+            });
+
+            favoriteRecipes.dinner.forEach(recipe => {
+                const li = document.createElement('li');
+                li.textContent = recipe;
+                dinnerList.appendChild(li);
+            });
+        }
+
+        window.onload = displayRecipes;
+    </script>
+</body>
+</html>
